@@ -72,7 +72,7 @@ data = DataLoader(Dataset(pairs, args.neg_size),
 
 embeddings = nn.Embedding(len(dictionary), args.embedding_dim + 1)  # the last 1-dim are used as the bias term in SIPS
 loss = nn.CrossEntropyLoss()
-lr = args.lr *  (args.batch_size ** 0.5) / (args.embedding_dim ** 0.5)
+lr = args.lr * (args.batch_size ** 0.5) / (args.embedding_dim ** 0.5)
 optimizer = optim.Adam(embeddings.parameters(), lr=lr)
 lr_scheduler = optim.lr_scheduler.ExponentialLR(optimizer,
                                                 gamma=math.exp(math.log(0.01) / args.max_epoch))

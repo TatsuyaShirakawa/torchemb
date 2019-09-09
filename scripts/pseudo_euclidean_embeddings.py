@@ -83,10 +83,11 @@ manifold = PseudoEuclideanSpace(args.positive_embedding_dim,
 
 loss = nn.CrossEntropyLoss()
 embedding_dim = args.positive_embedding_dim + args.negative_embedding_dim
-lr = args.lr *  (args.batch_size ** 0.5) / (embedding_dim ** 0.5)
+lr = args.lr * (args.batch_size ** 0.5) / (embedding_dim ** 0.5)
 optimizer = optim.Adam(embeddings.parameters(), lr=lr)
 lr_scheduler = optim.lr_scheduler.ExponentialLR(optimizer,
                                                 gamma=math.exp(math.log(0.01) / args.max_epoch))
+
 
 def train(embeddings, loss, optimizer, data, samples_per_iter):
     embeddings.train()

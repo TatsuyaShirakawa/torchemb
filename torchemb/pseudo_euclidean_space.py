@@ -36,10 +36,10 @@ class PseudoEuclideanSpace(object):
     def __init__(self, positive_dim, negative_dim):
         self.positive_dim = positive_dim
         self.negative_dim = negative_dim
-        
+
     def dot(self, x, y):
         assert(self.positive_dim + self.negative_dim == x.shape[-1])
-        assert(self.positive_dim + self.negative_dim == y.shape[-1])        
+        assert(self.positive_dim + self.negative_dim == y.shape[-1])
         x1, x2 = x[..., :self.positive_dim], x[..., self.positive_dim:]
         y1, y2 = y[..., :self.positive_dim], y[..., self.positive_dim:]
         return (x1 * y1).sum(-1) - (x2 * y2).sum(-1)

@@ -78,7 +78,7 @@ manifold = PoincareBall(c=args.c)
 
 loss = nn.CrossEntropyLoss()
 warmup_rate = 100
-lr = args.lr *  (args.batch_size ** 0.5) / (args.embedding_dim ** 0.5)
+lr = args.lr * (args.batch_size ** 0.5) / (args.embedding_dim ** 0.5)
 optimizer = optim.Adam(embeddings.parameters(), lr=lr)
 lr_scheduler = optim.lr_scheduler.ExponentialLR(optimizer,
                                                 gamma=math.exp(math.log(0.01) / args.max_epoch))
@@ -93,7 +93,7 @@ def train(embeddings, loss, optimizer, data, samples_per_iter):
         idx1, idx2 = next(data_iter)
         x, ys = embeddings(idx1), embeddings(idx2)
         assert(not torch.any(torch.isnan(x)))
-        assert(not torch.any(torch.isnan(ys)))        
+        assert(not torch.any(torch.isnan(ys)))
         ds = manifold.distance(x[:, None, :].expand_as(ys), ys)
         logits = -ds
         loss_ = loss(logits, torch.zeros(len(logits), dtype=torch.long))
